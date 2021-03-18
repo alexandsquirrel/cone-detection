@@ -1,8 +1,6 @@
 # Cone Detection for Autonomous Driving
 
-Author: Alex Fang, Gibbs Geng
-
-## [Video](https://drive.google.com/drive/folders/102KcxV4Cs8h5zXIITaYPuhDUB46EbJ0H?usp=sharing)
+Author: Alex Fang, Gibbs Geng, [Video](https://drive.google.com/drive/folders/102KcxV4Cs8h5zXIITaYPuhDUB46EbJ0H?usp=sharing)
 
 ## Overview
 
@@ -13,7 +11,7 @@ Our project involves two stages. First, we obtain the bounding boxes around all 
 
 ## Stage One: Bounding Box (mostly adapted from existing code with some modifications)
 
-The approach is based on an [off-the-shelf implementation](https://github.com/zzh8829/yolov3-tf2) of YOLOv3. Then, we did transfer learning from [a set of pretrained weights](https://pjreddie.com/darknet/yolo/). We modified several hyperparameters as well as the prediction classes so that it can learn and predit well on our small dataset. The inferences results on both the training set and the validation set is available in `/detections` (yes, if we had more data, we would have a dedicated test set).
+The approach is based on an [off-the-shelf implementation](https://github.com/zzh8829/yolov3-tf2) of YOLOv3. Then, we did transfer learning from [a set of pretrained weights](https://pjreddie.com/darknet/yolo/). We modified several hyperparameters as well as the prediction classes so that it can learn and predit well on our small [dataset](https://www.dropbox.com/s/fag8b45ijv14noy/cone_dataset.tar.gz?dl=0). The inferences results on both the training set and the validation set is available in `/detections` (yes, if we had more data, we would have a dedicated test set).
 
 ## Stage Two: Finding Precise Locations (implemented by our own in `./utils.py`)
 At this stage, we aim to find the exact positions of the cone within each (loose) bounding box. We accomplished this with feature engineering. First, what is the characteristic feature of a racing cone? Our response to this question is the two sides and the band in the middle. Given a bounding box, if we know the two lines (not line segments) on which the two sidelines reside, plus the location of the middle trapezoid that is the band, since we have prior information about the size of the band, we will know about the exact location of this cone.
