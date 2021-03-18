@@ -2,6 +2,8 @@
 
 Author: Alex Fang, Gibbs Geng
 
+## [Video](https://drive.google.com/drive/folders/102KcxV4Cs8h5zXIITaYPuhDUB46EbJ0H?usp=sharing)
+
 ## Overview
 
 This is the final project of CSE 455: Computer Vision. The goal of our project is to find the exact locations of every cone in the camera input. Such locations can be therefore converted to the 3D locations in the world and then be fed into the SLAM module in the formula racing car.
