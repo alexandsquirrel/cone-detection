@@ -9,15 +9,11 @@ This is the final project of CSE 455: Computer Vision. The goal of our project i
 Our project involves two stages. First, we obtain the bounding boxes around all cones with machine learning. Then, for each cone, we compute its precise location within the bounding box using a traditional CV approach. While stage 2 should be performed for every bounding box drawn in stage 1, however, given our limitation of training data, we did not establish such a connection. Instead, we demonstrated the feasibility of stage 1 by training a neural network on a generic cone-detection dataset. For stage 2, on the other hand, we ran our algorithm on a few hand-crafted bounding boxes on the official racing cones.
 
 
-## Usage
-- To 
+## Stage One: Bounding Box (mostly adapted from existing code with some modifications)
 
+The approach is based on an [off-the-shelf implementation](https://github.com/zzh8829/yolov3-tf2) of YOLOv3. Then, we did transfer learning from [a set of pretrained weights](https://pjreddie.com/darknet/yolo/). We modified several hyperparameters as well as the prediction classes so that it can learn and predit well on our small dataset. The inferences results on both the training set and the validation set is available in `/detections` (yes, if we had more data, we would have a dedicated test set).
 
-## Stage One: Bounding Box
-
-The approach is based on an [off-the-shelf implementation](https://github.com/zzh8829/yolov3-tf2) of YOLOv3. Then, we did transfer learning from [a set of pretrained weights](https://pjreddie.com/darknet/yolo/). We modified several hyperparameters as well as the predit classes so that it can learn and predit well on our small dataset. The inferences results on both the training set and the validation set is available in `/detections` (yes, if we had more data, we would have a dedicated test set).
-
-## Stage Two: Finding Precise Locations (in `./utils.py`)
+## Stage Two: Finding Precise Locations (implemented by our own in `./utils.py`)
 At this stage, we aim to find the exact positions of the cone within each (loose) bounding box. We accomplished this with feature engineering. First, what is the characteristic feature of a racing cone? Our response to this question is the two sides and the band in the middle. Given a bounding box, if we know the two lines (not line segments) on which the two sidelines reside, plus the location of the middle trapezoid that is the band, since we have prior information about the size of the band, we will know about the exact location of this cone.
 
 ### Noise Reduction & Edge Detection
@@ -47,4 +43,24 @@ After scoring all candidate lines, we return the top two choices.
 
 ## Future Work
 
+- Connect the object detection stage with the later stage once the YOLO model can be trained on the real racing cone dataset.
+- Heavier feature engineering in finding the exact location. Or, we may explore machine learning method instead of traditional CV in this stage.
+- Converting the exact locations of the cones into 3D coordinates with respect to the vehicle position. This requires the specification (focal length) of the camera being used.
+
 ## Usage
+
+-  To train the network (make sure that `train.tfrecord` and `val.tfrecord` are in `/data`):
+```
+python train.py 
+```
+
+- To generate bounding boxes for an image (some of the flags may need to be modified):
+```
+python detect.py
+```
+
+- To draw the sidelines and the two band edges on an image with a single cone:
+```
+python script.py
+```
+(This part of code has not been cleaned up; `script.py` is only used to use the feasibility of the algorithms implemented in `utils.py`, which will be integrated more cleanly into the final pipeline.)
