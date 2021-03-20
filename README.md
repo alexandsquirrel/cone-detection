@@ -4,7 +4,7 @@ Author: Alex Fang, Gibbs Geng, [Video](https://drive.google.com/drive/folders/10
 
 ## Overview
 
-This is the final project of CSE 455: Computer Vision. The goal of our project is to find the exact locations of every cone in the camera input. Such locations can be therefore converted to the 3D locations in the world and then be fed into the SLAM module in the formula racing car.
+This is the final project of CSE 455: Computer Vision. The goal of our project is to develop a perception pipeline for a formula racing car. Technically, out goal is to find the exact locations of every cone given the camera input. Such locations can be therefore converted to the 3D locations in the world and then be fed into the SLAM module in the formula racing car.
 
 Our project involves two stages. First, we obtain the bounding boxes around all cones with machine learning. Then, for each cone, we compute its precise location within the bounding box using a traditional CV approach. While stage 2 should be performed for every bounding box drawn in stage 1, however, given our limitation of training data, we did not establish such a connection. Instead, we demonstrated the feasibility of stage 1 by training a neural network on a generic cone-detection dataset. For stage 2, on the other hand, we ran our algorithm on a few hand-crafted bounding boxes on the official racing cones.
 
