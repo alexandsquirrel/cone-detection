@@ -1,6 +1,6 @@
 # Cone Detection for Autonomous Driving
 
-Author: Alex Fang, Gibbs Geng, [Video](https://drive.google.com/drive/folders/102KcxV4Cs8h5zXIITaYPuhDUB46EbJ0H?usp=sharing)
+Authors: Alex Fang, Gibbs Geng
 
 ## Overview
 
